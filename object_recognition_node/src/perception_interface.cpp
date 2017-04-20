@@ -52,7 +52,7 @@ std::vector<std::vector<int>> kColorPalette = {
 PerceptionInterface::PerceptionInterface(ros::NodeHandle nh) : nh_(nh),
   capture_kinect_(false),
   table_height_(0.0),
-  num_observations_to_integrate_(2) {
+  num_observations_to_integrate_(1) {
   ros::NodeHandle private_nh("~");
   private_nh.param("pcl_visualization", pcl_visualization_, false);
   private_nh.param("table_height", table_height_, 0.0);
@@ -117,7 +117,7 @@ void PerceptionInterface::CloudCB(const sensor_msgs::PointCloud2ConstPtr
 
   try {
     tf_listener_.waitForTransform(reference_frame_, sensor_cloud->header.frame_id,
-                                  ros::Time(0), ros::Duration(3.0));
+                                  ros::Time(0), ros::Duration(10.0));
     tf_listener_.lookupTransform(reference_frame_, sensor_cloud->header.frame_id,
                                  ros::Time(0), transform);
   } catch (tf::TransformException ex) {
@@ -161,8 +161,8 @@ void PerceptionInterface::CloudCB(const sensor_msgs::PointCloud2ConstPtr
                                      recent_observations_);
 
   ROS_DEBUG("[SBPL Perception]: Converted sensor cloud to pcl cloud");
-  CloudCBInternal(integrated_cloud);
-  // CloudCBInternal(pcl_cloud);
+  //CloudCBInternal(integrated_cloud);
+  CloudCBInternal(pcl_cloud);
 
   capture_kinect_ = false;
   return;
@@ -225,7 +225,7 @@ void PerceptionInterface::CloudCBInternal(const PointCloudPtr
   pt_filter.setInputCloud(table_removed_cloud);
   pt_filter.setKeepOrganized (true);
   pt_filter.setFilterFieldName("z");
-  pt_filter.setFilterLimits(table_height_ - 0.1, table_height_ + 0.5);
+  pt_filter.setFilterLimits(table_height_ - 0.1, table_height_ + 0.55);
   // pt_filter.setFilterLimits(table_height_ + 0.005, table_height_ + 0.5);
   pt_filter.filter(*table_removed_cloud);
 
