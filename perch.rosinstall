@@ -1,12 +1,12 @@
 - git:
     local-name: perch
-    uri: https://github.com/venkatrn/perception.git
+    uri: https://github.com/sbpl/perception.git
     version: master
 - git:
     local-name: improved-mha-planner
-    uri: https://github.com/venkatrn/improved-mha-planner.git
+    uri: https://github.com/sbpl/improved-mha-planner.git
     version: master
 - git:
     local-name: sbpl_utils
-    uri: https://github.com/venkatrn/sbpl_utils.git
+    uri: https://github.com/sbpl/sbpl_utils.git
     version: master
