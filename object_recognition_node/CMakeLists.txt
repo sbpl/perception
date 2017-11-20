@@ -12,14 +12,14 @@ set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS "-std=c++11")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(CMakeForceCompiler)
-CMAKE_FORCE_CXX_COMPILER(mpicxx ${CMAKE_CXX_COMPILER_ID})
-
-find_package(catkin REQUIRED genmsg actionlib_msgs actionlib 
+find_package(catkin REQUIRED genmsg actionlib_msgs actionlib
   COMPONENTS roscpp sensor_msgs perception_utils
   keyboard tf tf_conversions eigen_conversions sbpl_perception)
 find_package(Boost COMPONENTS mpi REQUIRED)
 find_package(MPI REQUIRED)
+
+include(CMakeForceCompiler)
+CMAKE_FORCE_CXX_COMPILER(mpicxx ${CMAKE_CXX_COMPILER_ID})
 
 # find_package(catkin REQUIRED genmsg actionlib_msgs actionlib)
 add_action_files(DIRECTORY action FILES DoPerch.action)
