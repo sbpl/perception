@@ -16,14 +16,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(ROS_COMPILE_FLAGS "-W -Wno-reorder")
 
 # Load catkin and all dependencies required for this package
-find_package(catkin REQUIRED COMPONENTS 
-  cv_bridge 
-  kinect_sim 
-  perception_utils 
-  pcl_ros 
-  roscpp 
-  roslib 
-  sbpl 
+find_package(catkin REQUIRED COMPONENTS
+  cv_bridge
+  kinect_sim
+  perception_utils
+  pcl_ros
+  roscpp
+  roslib
+  improved_mha_planner
   sbpl_utils)
 find_package(Boost COMPONENTS serialization thread mpi REQUIRED)
 # find_package(OpenCV REQUIRED)
@@ -48,24 +48,24 @@ include_directories(include ${Boost_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS}
 include_directories(MPI_INCLUDE_PATH)
 
 catkin_package(
-  CATKIN_DEPENDS 
-    cv_bridge 
-    kinect_sim 
-    perception_utils 
-    pcl_ros 
-    roscpp 
-    roslib 
-    sbpl 
+  CATKIN_DEPENDS
+    cv_bridge
+    kinect_sim
+    perception_utils
+    pcl_ros
+    roscpp
+    roslib
+    improved_mha_planner
     sbpl_utils
-  DEPENDS 
-    # OpenCV 
-    MPI 
-    OpenMP 
-    PCL 
+  DEPENDS
+    # OpenCV
+    MPI
+    OpenMP
+    PCL
     Boost
-  INCLUDE_DIRS 
+  INCLUDE_DIRS
     include
-  LIBRARIES 
+  LIBRARIES
     ${PROJECT_NAME}
   )
 
