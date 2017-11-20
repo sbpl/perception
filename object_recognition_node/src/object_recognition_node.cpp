@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
   
   //perception_interface.DetectObjects();
 
+  ros::Rate loop_rate(30.0);
   while(ros::ok())
   {
     if (perception_interface.pcl_visualization())
@@ -29,6 +30,7 @@ int main(int argc, char **argv) {
       // range_image_viewer->spinOnce();
     }
     ros::spinOnce();
+	loop_rate.sleep();
   }
   return 0;
 }
