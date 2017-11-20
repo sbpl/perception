@@ -21,11 +21,12 @@
     <remap from="input_cloud" to="/asus/depth_registered/points"/>
     <param name="pcl_visualization" value="true"/>
     <!-- <param name="table_height" value="1.127"/> <!&#45;&#45;1.13&#45;&#45;> -->
-    <param name="table_height" value="0.25"/> <!--1.13-->
-    <param name="xmin" value=".5"/> <!--1.13-->
-    <param name="xmax" value="1.5"/> <!--1.13-->
-    <param name="ymin" value="-.5"/> <!--1.13-->
-    <param name="ymax" value=".5"/> <!--1.13-->
+<!--     <param name="table_height" value="0.25"/> <!&#45;&#45;1.13&#45;&#45;> -->
+    <param name="table_height" value="0.29"/> <!--1.13-->
+    <param name="xmin" value=".75"/> <!--1.13-->
+    <param name="xmax" value="1.25"/> <!--1.13-->
+    <param name="ymin" value="-.25"/> <!--1.13-->
+    <param name="ymax" value=".25"/> <!--1.13-->
     <param name="reference_frame" value="/base_footprint"/>
     <param name="camera_frame" value="/asus_rgb_frame"/>
   </node>
