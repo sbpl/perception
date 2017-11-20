@@ -9,10 +9,12 @@
 
   <include file="$(find sbpl_perception)/config/ycb_objects.xml"/>
 
+  <!--node pkg="object_recognition_node" type="object_localizer" name="object_localizer_service" output="screen" launch-prefix="mpirun -n 4 --mca mpi_yield_when_idle 1" respawn="false"-->
   <node pkg="object_recognition_node" type="object_localizer" name="object_localizer_service" output="screen" launch-prefix="mpirun -n 4" respawn="false">
       <rosparam command="load" file="$(find sbpl_perception)/config/pr2_env_config.yaml" />
       <rosparam command="load" file="$(find sbpl_perception)/config/pr2_planner_config.yaml" />
       <rosparam command="load" file="$(find sbpl_perception)/config/camera_config.yaml" />
+      <!--rosparam command="load" file="$(find sbpl_perception)/config/roman_camera_config.yaml" /-->
       <param name="image_debug" value="$(arg image_debug)"/>
   </node>
 
@@ -22,14 +24,14 @@
     <param name="pcl_visualization" value="true"/>
     <!-- <param name="table_height" value="1.127"/> <!&#45;&#45;1.13&#45;&#45;> -->
 <!--     <param name="table_height" value="0.25"/> <!&#45;&#45;1.13&#45;&#45;> -->
-    <param name="table_height" value="0.29"/> <!--1.13-->
-    <param name="xmin" value=".75"/> <!--1.13-->
-    <param name="xmax" value="1.25"/> <!--1.13-->
-    <param name="ymin" value="-.25"/> <!--1.13-->
-    <param name="ymax" value=".25"/> <!--1.13-->
+    <param name="table_height" value="0.29"/>   <!-- 0.25 -->
+    <param name="xmin" value=".75"/>            <!-- 0.5 -->
+    <param name="xmax" value="1.25"/>           <!-- 1.5 -->
+    <param name="ymin" value="-.25"/>           <!-- -0.5 -->
+    <param name="ymax" value=".25"/>            <!-- 0.5 -->
     <param name="reference_frame" value="/base_footprint"/>
     <param name="camera_frame" value="/asus_rgb_frame"/>
-	<param name="wait_for_recent_cloud" value="true"/>
+	  <param name="wait_for_recent_cloud" value="true"/>
   </node>
 
   <!-- <node pkg="keyboard" type="keyboard" name="obj_recognition_keyboard_listener" output="screen"> -->

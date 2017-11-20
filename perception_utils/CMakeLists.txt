@@ -22,6 +22,23 @@ find_package(HDF5)
 include_directories(${PROJECT_SOURCE_DIR}/include ${catkin_INCLUDE_DIRS}
   ${PCL_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} )
 
+catkin_package(
+  DEPENDS
+    PCL
+    Boost
+    HDF5
+    # OpenCV
+  CATKIN_DEPENDS
+    pcl_ros
+    roscpp
+    pcl_conversions
+    cv_bridge
+  INCLUDE_DIRS
+    include
+  LIBRARIES
+    ${PROJECT_NAME}
+  )
+
 add_library(${PROJECT_NAME}
   src/perception_utils.cpp
   src/vfh/vfh_pose_estimator.cpp)
@@ -29,23 +46,6 @@ target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${HDF5_hdf5_LIBRARY}
   ${PCL_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES} libvtkCommon.so libvtkFiltering.so libvtkRendering.so libvtkIO.so
   libvtkGraphics.so)
-
-catkin_package( 
-  DEPENDS 
-    PCL 
-    Boost 
-    HDF5 
-    # OpenCV 
-  CATKIN_DEPENDS 
-    pcl_ros 
-    roscpp 
-    pcl_conversions
-    cv_bridge
-  INCLUDE_DIRS 
-    include
-  LIBRARIES 
-    ${PROJECT_NAME}
-  )
 
 add_executable(vfh_train tools/vfh/vfh_train.cpp)
 target_link_libraries(vfh_train ${PROJECT_NAME})

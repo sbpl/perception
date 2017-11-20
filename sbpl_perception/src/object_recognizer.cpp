@@ -285,7 +285,7 @@ bool ObjectRecognizer::RunPlanner(vector<ContPose> *detected_poses) const {
 
     // We'll reset the planner always since num_heuristics could vary between
     // requests.
-    planner_.reset(new MHAPlanner(env_obj_.get(), env_obj_->NumHeuristics(),
+    planner_.reset(new ImpMHAPlanner(env_obj_.get(), env_obj_->NumHeuristics(),
                                   true));
 
     int goal_id = env_obj_->GetGoalStateID();

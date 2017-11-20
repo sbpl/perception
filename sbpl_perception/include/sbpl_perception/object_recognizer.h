@@ -1,11 +1,12 @@
 #pragma once
 
 #include <sbpl/headers.h>
+#include <sbpl/planners/mha_planner.h>
 #include <sbpl_perception/search_env.h>
 
 #include <memory>
 
-#include <Eigen/Core> 
+#include <Eigen/Core>
 
 namespace sbpl_perception {
 class ObjectRecognizer {
@@ -30,7 +31,7 @@ class ObjectRecognizer {
   // Return the points in the input point cloud corresponding to each object.
   // The returned vector is of size input.model_names.size(). Note: This method
   // should be called right after LocalizeObjects.
-  std::vector<PointCloudPtr> GetObjectPointClouds() const;  
+  std::vector<PointCloudPtr> GetObjectPointClouds() const;
 
   const ModelBank &GetModelBank() const {
     return env_config_.model_bank;
@@ -41,14 +42,14 @@ class ObjectRecognizer {
   const EnvStats &GetLastEnvStats() const {
     return last_env_stats_;
   }
-  
+
   std::shared_ptr<EnvObjectRecognition> GetMutableEnvironment() {
     return env_obj_;
   }
 
  private:
   std::shared_ptr<EnvObjectRecognition> env_obj_;
-  mutable std::unique_ptr<MHAPlanner> planner_;
+  mutable std::unique_ptr<ImpMHAPlanner> planner_;
   mutable std::vector<PlannerStats> last_planning_stats_;
   mutable EnvStats last_env_stats_;
 
