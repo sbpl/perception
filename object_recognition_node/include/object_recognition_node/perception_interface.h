@@ -76,6 +76,9 @@ class PerceptionInterface
     sensor_msgs::Image recent_depth_image_;
     PointCloudPtr recent_cloud_; 
 
+	bool wait_for_recent_;
+	ros::Time cmd_rec_time_;
+
     // Does all the work
     void CloudCBInternal(const PointCloudPtr& original_cloud);
 

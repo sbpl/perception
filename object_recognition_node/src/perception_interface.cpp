@@ -53,6 +53,7 @@ PerceptionInterface::PerceptionInterface(ros::NodeHandle nh) : nh_(nh),
   capture_kinect_(false),
   table_height_(0.0),
   num_observations_to_integrate_(1) {
+  wait_for_recent_ = false;
   ros::NodeHandle private_nh("~");
   private_nh.param("pcl_visualization", pcl_visualization_, false);
   private_nh.param("table_height", table_height_, 0.0);
@@ -64,6 +65,7 @@ PerceptionInterface::PerceptionInterface(ros::NodeHandle nh) : nh_(nh),
                    std::string("/base_footprint"));
   private_nh.param("camera_frame", camera_frame_,
                    std::string("/head_mount_kinect_rgb_link"));
+  private_nh.param("wait_for_recent_cloud", wait_for_recent_, false);
 
   std::string param_key;
   XmlRpc::XmlRpcValue model_bank_list;
@@ -114,6 +116,12 @@ void PerceptionInterface::CloudCB(const sensor_msgs::PointCloud2ConstPtr
   sensor_msgs::PointCloud2 ref_sensor_cloud;
   tf::StampedTransform transform;
 
+  if (wait_for_recent_) {
+	if (sensor_cloud->header.stamp < cmd_rec_time_) {
+		ROS_WARN("Point cloud is too old!");
+		return;
+	}
+  }
 
   try {
     tf_listener_.waitForTransform(reference_frame_, sensor_cloud->header.frame_id,
@@ -412,6 +420,11 @@ void PerceptionInterface::RequestedObjectsCB(const std_msgs::String
   latest_requested_objects_ = vector<string>({object_name.data});
   capture_kinect_ = true;
   recent_observations_.clear();
+
+  if (wait_for_recent_) {
+	cmd_rec_time_ = ros::Time::now();
+  }
+
   return;
 }
 
