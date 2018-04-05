@@ -61,6 +61,7 @@ target_link_libraries(
   ${catkin_LIBRARIES}
   ${PCL_LIBRARIES}
   ${Boost_LIBRARIES})
+add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 install(PROGRAMS
   scripts/pr2_perch_client.py
@@ -77,6 +78,7 @@ target_link_libraries(
   libvtkRendering.so
   libvtkIO.so
   libvtkGraphics.so)
+add_dependencies(obj_rec_node ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 add_executable(object_localizer src/object_localizer_service.cpp)
 target_link_libraries(
@@ -88,6 +90,7 @@ target_link_libraries(
   libvtkRendering.so
   libvtkIO.so
   libvtkGraphics.so)
+add_dependencies(object_localizer ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 add_executable(
   object_localizer_client_example
